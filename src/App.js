@@ -1,4 +1,5 @@
 import React,{ Component }from 'react';
+import SearchForm from './components/SearchForm.jsx';
 import VideoList from './components/videolist.jsx';
 import axios from 'axios';
 
@@ -10,8 +11,6 @@ class App extends Component {
       inputValue: "",
       videos: []
     }
-    this.search()
-
   }
 
 search(query){
@@ -39,10 +38,7 @@ search(query){
 render(){
   return (
       <div>
-      <input 
-      onChange={(event)=> this.setState({inputValue:event.target.value})}
-      value={ this.state.inputValue }/>
-      <button onClick={()=>{ this.search(this.state.inputValue)}}> Search </button>
+      <SearchForm onSearch={(value) => {this.search(value)}}/>
       <VideoList videos={this.state.videos} />
       </div>
 )}
