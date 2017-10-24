@@ -7,7 +7,7 @@ const VideoItem = function(props) {
 
   return (
     <div>
-    <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + props.videoId} FrameBorder="0" AllowFullScreen></iframe>
+    <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + props.videoId} frameBorder="0" allowFullScreen></iframe>
     </div>
   )
 }
