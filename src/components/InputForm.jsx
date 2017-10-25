@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class SearchForm extends Component{
+class InputForm extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -10,7 +10,7 @@ class SearchForm extends Component{
   }
 
   search(value){
-  	this.props.onSearch(value)
+  	this.props.onSend(value)
  }
 
 
@@ -26,11 +26,11 @@ return(
       onChange={(event)=> this.setState({inputValue:event.target.value})}
       value={ this.state.inputValue }/>
   
-    <button> Search </button>
+    <button> {this.props.buttonTitle} </button>
   
   </form>
 	)
 }
 }
 
-export default SearchForm;
+export default InputForm;

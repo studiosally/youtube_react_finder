@@ -1,6 +1,8 @@
 import React,{ Component }from 'react';
-import SearchForm from './components/SearchForm.jsx';
+import { BrowserRouter , Switch, Route} from  'react-router-dom'
+import MenuBar from './components/MenuBar.jsx';
 import VideoList from './components/videolist.jsx';
+import VideoPlayer from './components/VideoPlayer.jsx';
 import axios from 'axios';
 
 
@@ -20,14 +22,21 @@ search(query){
   const promise = axios.get(url)
 
   promise.then(response =>{
+    
     const items = response.data.items
     
     const videos = items
       .filter((v => v.id.kind === "youtube#video"))
+      .map(v => (
+          {
+            id: v.id.videoId,
+            title: v.snippet.title,
+            image: v.snippet.thumbnails.medium.url
+          }
+        ))
 
-      console.log("loaded" + videos.lenght +"videos")
 
-      this.setState({ videos:videos })
+      this.setState({ videos: videos })
   }) 
 
   promise.catch(error => console.log("errror"))
@@ -38,8 +47,14 @@ search(query){
 render(){
   return (
       <div>
-      <SearchForm onSearch={(value) => {this.search(value)}}/>
-      <VideoList videos={this.state.videos} />
+      <MenuBar onSearch={(value) => {this.search(value)}} />
+      <BrowserRouter>
+      <Switch>
+      <Route exact path='/' 
+      render={ () => <VideoList videos={this.state.videos} />}/>
+      <Route path='/detail/:id' component={VideoPlayer}/>
+      </Switch>
+      </BrowserRouter>
       </div>
 )}
 

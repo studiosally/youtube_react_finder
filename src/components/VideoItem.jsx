@@ -1,16 +1,19 @@
 import React from 'react'
-import type { Video } from './types'
 
-const VideoItem = function(props) {
-
-	console.log("props received", props)
+const VideoItem = (props) => {
 
   return (
     <div>
-    <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + props.videoId} frameBorder="0" allowFullScreen></iframe>
+    	<div> {props.video.title}</div>
+		<img src={props.video.image} alt={props.video.title} />
+  
     </div>
   )
+
 }
+
+
+
 
 export default VideoItem
 

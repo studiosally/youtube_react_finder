@@ -1,16 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import VideoItem from './VideoItem.jsx'
+import './videolist.css'
 
-const VideoList = function (props){
 
-	const videoItems= props.videos.map((v) => 
-        <VideoItem 
-        key ={v.id.videoId}
-        videoId={v.id.videoId} 
-        title ={v.snippet.title}/>
+
+const VideoList = (props) =>{
+
+	const videoItems= props.videos.map(v => 
+        <Link key = {v.id} to={"/detail/" + v.id}>
+        <VideoItem  video={v} />
+        </Link>
       )
+
 	return(
-		<div> {videoItems} </div>
+		<div className="video-list"> {videoItems} </div>
 		)	
 }
 
